@@ -131,6 +131,51 @@ namespace SuperBot_1_0.Services
                 return "error!!";
             }
         }
+        
+        public static string[] getLeaderBoard()
+        {
+            string first = ""; int firstlvl = 0;
+            string second = ""; int secondlvl = 0;
+            string third = ""; int thirdlvl = 0;
+            XmlDocument doc = new XmlDocument();
+            doc.Load("./file/ranks/ranking.xml");
+            foreach (XmlNode node in doc.SelectNodes("root/users/UserID"))
+            {
+                if (int.Parse(node.SelectSingleNode("level/currentlvl").Attributes[0].InnerText) > firstlvl && firstlvl == 0)
+                {
+                    first = $"{node.Attributes[0].InnerText}";
+                    firstlvl = int.Parse(node.SelectSingleNode("level/currentlvl").Attributes[0].InnerText);
+                }
+                else if (int.Parse(node.SelectSingleNode("level/currentlvl").Attributes[0].InnerText) > firstlvl)
+                {
+                    third = second;
+                    thirdlvl = secondlvl;
+                    second = first;
+                    secondlvl = firstlvl;
+                    first = $"{node.Attributes[0].InnerText}";
+                    firstlvl = int.Parse(node.SelectSingleNode("level/currentlvl").Attributes[0].InnerText);
+                }
+                else if (int.Parse(node.SelectSingleNode("level/currentlvl").Attributes[0].InnerText) > secondlvl && secondlvl == 0)
+                {
+                    second = $"{node.Attributes[0].InnerText}";
+                    secondlvl = int.Parse(node.SelectSingleNode("level/currentlvl").Attributes[0].InnerText);
+                }
+                else if (int.Parse(node.SelectSingleNode("level/currentlvl").Attributes[0].InnerText) > secondlvl)
+                {
+                    third = second;
+                    thirdlvl = secondlvl;
+                    second = $"{node.Attributes[0].InnerText}";
+                    secondlvl = int.Parse(node.SelectSingleNode("level/currentlvl").Attributes[0].InnerText);
+                }
+                else if (int.Parse(node.SelectSingleNode("level/currentlvl").Attributes[0].InnerText) > thirdlvl)
+                {
+                    third = $"{node.Attributes[0].InnerText}";
+                    thirdlvl = int.Parse(node.SelectSingleNode("level/currentlvl").Attributes[0].InnerText);
+                }
+            }
+            string[] lb = {first, second, third};
+            return lb;
+        }
 
         public static string daily(ICommandContext context)
         {
