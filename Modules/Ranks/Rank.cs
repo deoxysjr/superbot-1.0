@@ -14,6 +14,18 @@ namespace SuperBot_1_0.Modules.Ranks
         {
             await ReplyAsync(RankUtils.Rank(Context, user));
         }
+        
+        [Command("leaderboard"), Alias("lb")]
+        public async Task LeaderBoard()
+        {
+            string[] lb = RankUtils.getLeaderBoard();
+            IUser first = client.GetUser(ulong.Parse(lb[0]));
+            IUser second = client.GetUser(ulong.Parse(lb[1]));
+            IUser third = client.GetUser(ulong.Parse(lb[2]));
+            EmbedBuilder builder = new EmbedBuilder();
+            builder.AddField("global Leaderboard", $"#1  {first.Mention}" + $"\n#2 {second.Mention}" + $"\n#3 {third.Mention}");
+            await ReplyAsync("", false, builder.Build());
+        }
 
         [Command("daily")]
         public async Task daily()
