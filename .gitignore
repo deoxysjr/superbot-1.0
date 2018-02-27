@@ -3,3 +3,5 @@
 ################################################################################
 
 /SuperBot_1.0/obj/Debug
+/SuperBot_1.0/bin/Debug/file
+/SuperBot_1.0/bin/Debug/client_secret.json

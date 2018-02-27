@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>StrawPollNET</name>
+    </assembly>
+    <members>
+        <member name="T:StrawPollNET.API">
+            <summary>
+            Base API of this Strawpoll library.
+            </summary>
+        </member>
+        <member name="T:StrawPollNET.API.Get">
+            <summary>
+            Namespace for functions to get details about existing polls.
+            </summary>
+        </member>
+        <member name="M:StrawPollNET.API.Get.GetPoll(System.Int32)">
+            <summary>
+            [SYNC] This call will fetch the various details including results of an existing Strawpoll.
+            </summary>
+            <param name="pollId">The unique id assigned to the poll.</param>
+            <returns>FetchedPoll is returned, which houses all poll data.</returns>
+        </member>
+        <member name="M:StrawPollNET.API.Get.GetPollAsync(System.Int32)">
+            <summary>
+            [ASYNC] This call will fetch the various details including results of an existing Strawpoll.
+            </summary>
+            <param name="pollId">The unique id assigned to the poll.</param>
+            <returns>FetchedPoll is returned, which houses all poll data.</returns>
+        </member>
+        <member name="T:StrawPollNET.API.Create">
+            <summary>
+            Namespace for functions to create a new Strawpoll.
+            </summary>
+        </member>
+        <member name="M:StrawPollNET.API.Create.CreatePoll(System.String,System.Collections.Generic.List{System.String},System.Boolean,StrawPollNET.Enums.DupCheck,System.Boolean)">
+            <summary>
+            [SYNC] This call will attempt to create a poll and return an object housing all the details about the poll.
+            </summary>
+            <param name="title">The title that is presented to the voter.</param>
+            <param name="options">List of strings to be included as options in the poll. Max: 30, Min: 2.</param>
+            <param name="multi">Boolean value dictating whether voters can select multiple choices or not.</param>
+            <param name="dupCheck">Enum reflecting the kind of duplication checking Strawpoll should do.</param>
+            <param name="captcha">Boolean value dicating whether or not a captcha should be required.</param>
+            <returns>CreatedPoll is returned, which houses all poll data.</returns>
+        </member>
+        <member name="M:StrawPollNET.API.Create.CreatePollAsync(System.String,System.Collections.Generic.List{System.String},System.Boolean,StrawPollNET.Enums.DupCheck,System.Boolean)">
+            <summary>
+            [SYNC] This call will attempt to create a poll and return an object housing all the details about the poll.
+            </summary>
+            <param name="title">The title that is presented to the voter.</param>
+            <param name="options">List of strings to be included as options in the poll. Max: 30, Min: 2.</param>
+            <param name="multi">Boolean value dictating whether voters can select multiple choices or not.</param>
+            <param name="dupCheck">Enum reflecting the kind of duplication checking Strawpoll should do.</param>
+            <param name="captcha">Boolean value dicating whether or not a captcha should be required.</param>
+            <returns>CreatedPoll is returned, which houses all poll data.</returns>
+        </member>
+        <member name="T:StrawPollNET.Exceptions.BadParameterException">
+            <summary>Exception representing an invalid parameter</summary>
+        </member>
+        <member name="M:StrawPollNET.Exceptions.BadParameterException.#ctor(System.String)">
+            <summary>Exception constructor</summary>
+        </member>
+        <member name="T:StrawPollNET.Exceptions.BadResourceException">
+            <summary>Exception representing an invalid resource</summary>
+        </member>
+        <member name="M:StrawPollNET.Exceptions.BadResourceException.#ctor(System.String)">
+            <summary>Exception constructor</summary>
+        </member>
+        <member name="P:StrawPollNET.Models.CreatedPoll.Id">
+            <summary>Auto generated id of created poll.</summary>
+        </member>
+        <member name="P:StrawPollNET.Models.CreatedPoll.Title">
+            <summary>Titled assigned by poll creator.</summary>
+        </member>
+        <member name="P:StrawPollNET.Models.CreatedPoll.Options">
+            <summary>All options currently in the poll.</summary>
+        </member>
+        <member name="P:StrawPollNET.Models.CreatedPoll.Multi">
+            <summary>Boolean representing whether or not poll is multiple choice.</summary>
+        </member>
+        <member name="P:StrawPollNET.Models.CreatedPoll.DupCheck">
+            <summary>Type of duplication check employed by this poll.</summary>
+        </member>
+        <member name="P:StrawPollNET.Models.CreatedPoll.Captcha">
+            <summary>Boolean representing whether or not poll requires captcha.</summary>
+        </member>
+        <member name="P:StrawPollNET.Models.CreatedPoll.PollUrl">
+            <summary>URL to the created poll.</summary>
+        </member>
+        <member name="M:StrawPollNET.Models.CreatedPoll.#ctor(Newtonsoft.Json.Linq.JToken)">
+            <summary>CreatedPoll constructor.</summary>
+        </member>
+        <member name="P:StrawPollNET.Models.FetchedPoll.Id">
+            <summary>Auto generated id of created poll.</summary>
+        </member>
+        <member name="P:StrawPollNET.Models.FetchedPoll.Title">
+            <summary>Titled assigned by poll creator.</summary>
+        </member>
+        <member name="P:StrawPollNET.Models.FetchedPoll.Multi">
+            <summary>Boolean representing whether or not poll is multiple choice.</summary>
+        </member>
+        <member name="P:StrawPollNET.Models.FetchedPoll.DupCheck">
+            <summary>Type of duplication check employed by this poll.</summary>
+        </member>
+        <member name="P:StrawPollNET.Models.FetchedPoll.Captcha">
+            <summary>Boolean representing whether or not poll requires captcha.</summary>
+        </member>
+        <member name="P:StrawPollNET.Models.FetchedPoll.PollUrl">
+            <summary>URL to the created poll.</summary>
+        </member>
+        <member name="F:StrawPollNET.Models.FetchedPoll.Results">
+            <summary>A pair where the key is the option, and the value is the number of votes that key option has.</summary>
+        </member>
+        <member name="M:StrawPollNET.Models.FetchedPoll.#ctor(Newtonsoft.Json.Linq.JToken)">
+            <summary>FetchedPoll constructor.</summary>
+        </member>
+    </members>
+</doc>
