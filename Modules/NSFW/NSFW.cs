@@ -46,16 +46,20 @@ namespace SuperBot_1_0.Modules.NSFW
                     {
                         if (url.Contains(".webm"))
                         {
+                            string[] urltags = url.Split('`');
                             builder.Color = Color.Green;
                             builder.Title = $"I found this Image with the tag or tags: **{tag}**";
-                            builder.WithDescription(url);
+                            builder.Description = $"{urltags[1].Replace(" ", ", ")}";
+                            builder.WithDescription(urltags[0]);
                             await ReplyAsync("", false, builder.Build());
                         }
                         else
                         {
+                            string[] urltags = url.Split('`');
                             builder.Color = Color.Green;
                             builder.Title = $"I found this Image with the tag or tags: **{tag}**";
-                            builder.WithImageUrl(url);
+                            builder.Description = $"{urltags[1].Replace(" ", ", ")}";
+                            builder.WithImageUrl(urltags[0]);
                             await ReplyAsync("", false, builder.Build());
                         }
                     }
@@ -105,16 +109,20 @@ namespace SuperBot_1_0.Modules.NSFW
                         {
                             if (url.Contains(".webm"))
                             {
+                                string[] urltags = url.Split('`');
                                 builder.Color = Color.Green;
                                 builder.Title = $"I found this Image with the tag or tags: **{tag}**";
-                                builder.WithDescription(url);
+                                builder.Description = $"{urltags[1].Replace(" ", ", ")}";
+                                builder.WithDescription(urltags[0]);
                                 await ReplyAsync("", false, builder.Build());
                             }
                             else
                             {
+                                string[] urltags = url.Split('`');
                                 builder.Color = Color.Green;
                                 builder.Title = $"I found this Image with the tag or tags: **{tag}**";
-                                builder.WithImageUrl(url);
+                                builder.Description = $"{urltags[1].Replace(" ", ", ")}";
+                                builder.WithImageUrl(urltags[0]);
                                 await ReplyAsync("", false, builder.Build());
                             }
                         }
@@ -163,9 +171,11 @@ namespace SuperBot_1_0.Modules.NSFW
                     }
                     else
                     {
+                        string[] urltags = url.Split('`');
                         builder.Color = Color.Green;
                         builder.Title = $"I found this Image with the tag or tags: **{tag}**";
-                        builder.WithImageUrl(url);
+                        builder.Description = $"{urltags[1].Replace(" ", ", ")}";
+                        builder.WithImageUrl(urltags[0]);
                         await ReplyAsync("", false, builder.Build());
                     }
                 }
@@ -205,9 +215,11 @@ namespace SuperBot_1_0.Modules.NSFW
                     }
                     else
                     {
+                        string[] urltags = url.Split('`');
                         builder.Color = Color.Green;
                         builder.Title = $"I found this Image with the tag or tags: **{tag}**";
-                        builder.WithImageUrl(url);
+                        builder.Description = $"{urltags[1].Replace(" ", ", ")}";
+                        builder.WithImageUrl(urltags[0]);
                         await ReplyAsync("", false, builder.Build());
                     }
                 }

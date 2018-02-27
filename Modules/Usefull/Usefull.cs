@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace SuperBot_1_0.Modules.Usefull
 {
-    public class Weather : ModuleBase
+    public class Usefull : ModuleBase<ICommandContext>
     {
         string appkey = "c411f4d6f0e7476ec59d40ab7000fbdb";
 
@@ -151,10 +151,7 @@ namespace SuperBot_1_0.Modules.Usefull
                 await ReplyAsync("", false, builder.Build());
             }
         }
-    }
 
-    public class Colors : ModuleBase<ICommandContext>
-    {
         [Command("color")]
         public async Task color(params string[] arg)
         {
@@ -166,87 +163,87 @@ namespace SuperBot_1_0.Modules.Usefull
 
             if (arg1 == "red")
             {
-                sendcolor.ColorRed(width, height, Context, bmp);
+                Sendcolor.ColorRed(width, height, Context, bmp);
                 return;
             }
             if (arg1 == "lightred")
             {
-                sendcolor.ColorLightRed(width, height, Context, bmp);
+                Sendcolor.ColorLightRed(width, height, Context, bmp);
                 return;
             }
             if (arg1 == "green")
             {
-                sendcolor.ColorGreen(width, height, Context, bmp);
+                Sendcolor.ColorGreen(width, height, Context, bmp);
                 return;
             }
             if (arg1 == "lightgreen")
             {
-                sendcolor.ColorLightGreen(width, height, Context, bmp);
+                Sendcolor.ColorLightGreen(width, height, Context, bmp);
                 return;
             }
             if (arg1 == "blue")
             {
-                sendcolor.ColorBlue(width, height, Context, bmp);
+                Sendcolor.ColorBlue(width, height, Context, bmp);
                 return;
             }
             if (arg1 == "lightblue")
             {
-                sendcolor.ColorLightBlue(width, height, Context, bmp);
+                Sendcolor.ColorLightBlue(width, height, Context, bmp);
                 return;
             }
             if (arg1 == "black" || arg1 == "nigger")
             {
-                sendcolor.ColorBlack(width, height, Context, bmp);
+                Sendcolor.ColorBlack(width, height, Context, bmp);
                 return;
             }
             if (arg1 == "White")
             {
-                sendcolor.ColorWhite(width, height, Context, bmp);
+                Sendcolor.ColorWhite(width, height, Context, bmp);
                 return;
             }
             if (arg1 == "lightgray")
             {
-                sendcolor.ColorLightGray(width, height, Context, bmp);
+                Sendcolor.ColorLightGray(width, height, Context, bmp);
                 return;
             }
             if (arg1 == "gray")
             {
-                sendcolor.ColorGray(width, height, Context, bmp);
+                Sendcolor.ColorGray(width, height, Context, bmp);
                 return;
             }
             if (arg1 == "yellow")
             {
-                sendcolor.ColorYellow(width, height, Context, bmp);
+                Sendcolor.ColorYellow(width, height, Context, bmp);
                 return;
             }
             if (arg1 == "orange")
             {
-                sendcolor.ColorOrange(width, height, Context, bmp);
+                Sendcolor.ColorOrange(width, height, Context, bmp);
                 return;
             }
             if (arg1 == "purple")
             {
-                sendcolor.ColorPurple(width, height, Context, bmp);
+                Sendcolor.ColorPurple(width, height, Context, bmp);
                 return;
             }
             if (arg1 == "random")
             {
-                sendcolor.ColorRandom(width, height, Context, bmp);
+                Sendcolor.ColorRandom(width, height, Context, bmp);
                 return;
             }
             if (arg1 == "randomall")
             {
-                sendcolor.ColorRandomAll(width, height, Context, bmp);
+                Sendcolor.ColorRandomAll(width, height, Context, bmp);
                 return;
             }
             if (arg1 == "randomvret")
             {
-                sendcolor.ColorRandomVret(width, height, Context, bmp);
+                Sendcolor.ColorRandomVret(width, height, Context, bmp);
                 return;
             }
             if (arg1 == "randomhor")
             {
-                sendcolor.ColorRandomHor(width, height, Context, bmp);
+                Sendcolor.ColorRandomHor(width, height, Context, bmp);
                 return;
             }
 
@@ -375,10 +372,7 @@ namespace SuperBot_1_0.Modules.Usefull
                 File.Delete(@"./text.png");
             }
         }
-    }
 
-    public class Anime : ModuleBase
-    {
         [Command("anime")]
         public async Task searchAnime([Remainder]string anime)
         {
@@ -437,6 +431,37 @@ namespace SuperBot_1_0.Modules.Usefull
             }
 
             await ReplyAsync("", false, builder.Build());
+        }
+
+        [Command("Encrypt"), RequireOwner]
+        public async Task encrypt([Remainder]string text)
+        {
+            File.AppendAllText("./encryptedmessage.txt", Encrypt.EncryptText(text));
+            await Context.Channel.SendFileAsync("./encryptedmessage.txt");
+            if (File.Exists("./encryptedmessage.txt"))
+                File.Delete("./encryptedmessage.txt");
+        }
+
+        [Command("Decrypt"), RequireOwner]
+        public async Task decrypt([Remainder]string text)
+        {
+            try
+            {
+                string output = Decrypt.ToText(text);
+                if (output.Contains("error"))
+                    await ReplyAsync(output);
+                else
+                {
+                    File.AppendAllText("./decryptedmessage.txt", output);
+                    await Context.Channel.SendFileAsync("./decryptedmessage.txt");
+                    if (File.Exists("./decryptedmessage.txt"))
+                        File.Delete("./decryptedmessage.txt");
+                }
+            }
+            catch (Exception ex)
+            {
+                await ReplyAsync(ex.Message);
+            }
         }
 
         public string TotalTime(string eps, string dur)
