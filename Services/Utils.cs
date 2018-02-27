@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using StrawPollNET.Enums;
+using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml;
@@ -137,7 +140,7 @@ namespace SuperBot_1_0.Services
                         var url = node.Attributes["file_url"].Value;
                         if (!url.StartsWith("http"))
                             url = "https:" + url;
-                        return url;
+                        return url + "`" + node.Attributes["tags"].Value;
                     }
                 }).ConfigureAwait(false);
                 return toReturn;
@@ -176,7 +179,7 @@ namespace SuperBot_1_0.Services
                         var url = node.Attributes["file_url"].Value;
                         if (!url.StartsWith("http"))
                             url = "https:" + url;
-                        return url;
+                        return url + "`" + node.Attributes["tags"].Value;
                     }
                 }).ConfigureAwait(false);
                 return toReturn;

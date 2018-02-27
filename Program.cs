@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
@@ -6,6 +6,8 @@ using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using Discord.Net.Providers.WS4Net;
+using SuperBot_1_0.Services;
+using System.IO;
 
 namespace SuperBot_1_0
 {
@@ -54,6 +56,7 @@ namespace SuperBot_1_0
             }
             Console.WriteLine($"{DateTime.Now,-19} [{message.Severity}] {message.Source}: {message.Message} {message.Exception}");
             Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.White;
 
             return Task.CompletedTask;
         }
@@ -66,8 +69,7 @@ namespace SuperBot_1_0
                 .BuildServiceProvider();
 
             await InitCommands();
-            Modules.Ranks.Rank.level(_client);
-            await _client.LoginAsync(TokenType.Bot, Token);
+            await _client.LoginAsync(TokenType.Bot, File.ReadAllText("./discordkey.txt"));
             await _client.StartAsync();
 
             await Task.Delay(4000);
@@ -108,9 +110,20 @@ namespace SuperBot_1_0
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine($"{DateTime.Now,-19} [{msg.Author.Username}] Used {msg.ToString()}");
                     Console.ForegroundColor = ConsoleColor.White;
-                    Services.CommandUsed.CommandAdd();
+                    CommandUsed.CommandAdd();
                 }
             }
+
+            Random rand = new Random();
+
+            if (arg.Author.IsBot)
+                return;
+            else
+            {
+                RankUtils.MessageRecieved(arg, rand);
+            }
+                
+            
         }
     }
 }

@@ -21,5 +21,14 @@ namespace SuperBot_1_0.Services
             xDoc.SelectSingleNode("root/clear").InnerText = (int.Parse(number) + v).ToString();
             xDoc.Save("./file/commandsused.xml");
         }
+
+        public static void TotalLvlAdd()
+        {
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load("./file/commandsused.xml");
+            string number = xDoc.SelectSingleNode("root/totallevels").InnerText;
+            xDoc.SelectSingleNode("root/totallevels").InnerText = (int.Parse(number) + 1).ToString();
+            xDoc.Save("./file/commandsused.xml");
+        }
     }
 }
