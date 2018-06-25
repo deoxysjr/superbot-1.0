@@ -1,12 +1,11 @@
-﻿using Newtonsoft.Json.Linq;
-using StrawPollNET.Enums;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml;
+using Discord.Commands;
+using Discord.WebSocket;
 
-namespace SuperBot_1_0.Services
+namespace SuperBot_2._0.Services
 {
     class Utils
     {
@@ -188,6 +187,39 @@ namespace SuperBot_1_0.Services
             {
                 return null;
             }
+        }
+
+        public async static void CustomErrors(SocketUserMessage msg, IResult result, SocketCommandContext context)
+        {
+            string message = "";
+            switch (result.Error)
+            {
+                case CommandError.UnknownCommand:
+                    message = $"I don't know what your talking about what is {msg.ToString()}";
+                    break;
+                case CommandError.BadArgCount:
+                    message = "You don't have the right argument count";
+                    break;
+                case CommandError.Exception:
+                    message = result.ErrorReason;
+                    break;
+                case CommandError.MultipleMatches:
+                    message = "I think I'm on drugs because I see multiple like that";
+                    break;
+                case CommandError.ObjectNotFound:
+                    message = "I don't know where that object is";
+                    break;
+                case CommandError.ParseFailed:
+                    message = "I tried to Parse it but it didn't work";
+                    break;
+                case CommandError.UnmetPrecondition:
+                    message = "there are preconditions for a reason you know";
+                    break;
+                case CommandError.Unsuccessful:
+                    message = "sorry master I tried but I coulded do it";
+                    break;
+            }
+            await context.Channel.SendMessageAsync(message);
         }
 
         public static string CalculateTimeWithSeconds(int seconds)

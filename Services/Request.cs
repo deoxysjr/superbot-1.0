@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SuperBot_1_0.Services
+namespace SuperBot_2._0.Services
 {
     public class PollRequest
     {
@@ -14,12 +14,12 @@ namespace SuperBot_1_0.Services
         {
         }
 
-        public PollRequest(string title, List<string> options, DupCheck dupcheck, bool multi, bool captcha)
+        public PollRequest(string title, List<string> options, bool multi, DupCheck dupcheck, bool captcha)
         {
             Title = title;
             Options = options;
-            Dupcheck = dupcheck;
             Multi = multi;
+            Dupcheck = dupcheck;
             Captcha = captcha;
         }
 

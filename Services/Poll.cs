@@ -1,7 +1,7 @@
 ﻿using StrawPollNET.Enums;
 using System.Collections.Generic;
 
-namespace SuperBot_1_0.Modules
+namespace SuperBot_2._0.Services
 {
     public class Poll
     {

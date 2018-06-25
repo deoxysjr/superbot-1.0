@@ -1,12 +1,11 @@
 ﻿using Newtonsoft.Json;
 using StrawPollNET.Enums;
-using SuperBot_1_0.Modules;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SuperBot_1_0.Services
+namespace SuperBot_2._0.Services
 {
     public class Strawpoll
     {
@@ -45,7 +44,7 @@ namespace SuperBot_1_0.Services
             HttpResponseMessage resultJson;
 
             using (var client = new HttpClient())
-                resultJson = await client.GetAsync(endpointURL + @"/" + id);
+                resultJson = await client.GetAsync(endpointURL + "/" + id);
 
             return JsonConvert.DeserializeObject<Poll>(await resultJson.Content.ReadAsStringAsync());
         }
