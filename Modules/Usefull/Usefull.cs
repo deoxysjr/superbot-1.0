@@ -16,7 +16,7 @@ namespace SuperBot_2._0.Modules.Usefull
 {
     public class Usefull : ModuleBase<ICommandContext>
     {
-        string appkey = "c411f4d6f0e7476ec59d40ab7000fbdb";
+        string appkey = "key";
 
         [Command("weather")]
         public async Task Weather([Remainder]string city)
