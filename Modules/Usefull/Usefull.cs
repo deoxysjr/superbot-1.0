@@ -8,18 +8,18 @@ using Discord;
 using Discord.Commands;
 using SuperBotDLL1_0.color;
 using SuperBotDLL1_0.Untils;
-using SuperBot_1_0.Services;
+using SuperBot_2._0.Services;
 using System.Net.Http;
 using Newtonsoft.Json;
 
-namespace SuperBot_1_0.Modules.Usefull
+namespace SuperBot_2._0.Modules.Usefull
 {
     public class Usefull : ModuleBase<ICommandContext>
     {
         string appkey = "c411f4d6f0e7476ec59d40ab7000fbdb";
 
         [Command("weather")]
-        public async Task weather([Remainder]string city)
+        public async Task Weather([Remainder]string city)
         {
             if (city.Contains("_"))
                 city.Replace('_', ' ');
@@ -118,7 +118,7 @@ namespace SuperBot_1_0.Modules.Usefull
         }
 
         [Command("forecast")]
-        public async Task forecast([Remainder]string city)
+        public async Task Forecast([Remainder]string city)
         {
             var builder = new EmbedBuilder();
             try
@@ -153,98 +153,69 @@ namespace SuperBot_1_0.Modules.Usefull
         }
 
         [Command("color")]
-        public async Task color(params string[] arg)
+        public async Task ColorSend(params string[] arg)
         {
             string img = @".\1024x1024.jpg";
             Bitmap bmp = new Bitmap(img);
             string arg1 = arg[0];
             int width = bmp.Width;
             int height = bmp.Height;
-
-            if (arg1 == "red")
+            switch (arg1)
             {
-                Sendcolor.ColorRed(width, height, Context, bmp);
-                return;
-            }
-            if (arg1 == "lightred")
-            {
-                Sendcolor.ColorLightRed(width, height, Context, bmp);
-                return;
-            }
-            if (arg1 == "green")
-            {
-                Sendcolor.ColorGreen(width, height, Context, bmp);
-                return;
-            }
-            if (arg1 == "lightgreen")
-            {
-                Sendcolor.ColorLightGreen(width, height, Context, bmp);
-                return;
-            }
-            if (arg1 == "blue")
-            {
-                Sendcolor.ColorBlue(width, height, Context, bmp);
-                return;
-            }
-            if (arg1 == "lightblue")
-            {
-                Sendcolor.ColorLightBlue(width, height, Context, bmp);
-                return;
-            }
-            if (arg1 == "black" || arg1 == "nigger")
-            {
-                Sendcolor.ColorBlack(width, height, Context, bmp);
-                return;
-            }
-            if (arg1 == "White")
-            {
-                Sendcolor.ColorWhite(width, height, Context, bmp);
-                return;
-            }
-            if (arg1 == "lightgray")
-            {
-                Sendcolor.ColorLightGray(width, height, Context, bmp);
-                return;
-            }
-            if (arg1 == "gray")
-            {
-                Sendcolor.ColorGray(width, height, Context, bmp);
-                return;
-            }
-            if (arg1 == "yellow")
-            {
-                Sendcolor.ColorYellow(width, height, Context, bmp);
-                return;
-            }
-            if (arg1 == "orange")
-            {
-                Sendcolor.ColorOrange(width, height, Context, bmp);
-                return;
-            }
-            if (arg1 == "purple")
-            {
-                Sendcolor.ColorPurple(width, height, Context, bmp);
-                return;
-            }
-            if (arg1 == "random")
-            {
-                Sendcolor.ColorRandom(width, height, Context, bmp);
-                return;
-            }
-            if (arg1 == "randomall")
-            {
-                Sendcolor.ColorRandomAll(width, height, Context, bmp);
-                return;
-            }
-            if (arg1 == "randomvret")
-            {
-                Sendcolor.ColorRandomVret(width, height, Context, bmp);
-                return;
-            }
-            if (arg1 == "randomhor")
-            {
-                Sendcolor.ColorRandomHor(width, height, Context, bmp);
-                return;
+                case "red":
+                    Sendcolor.ColorRed(width, height, Context, bmp);
+                    break;
+                case "lightred":
+                    Sendcolor.ColorLightRed(width, height, Context, bmp);
+                    break;
+                case "green":
+                    Sendcolor.ColorGreen(width, height, Context, bmp);
+                    break;
+                case "lightgreen":
+                    Sendcolor.ColorLightGreen(width, height, Context, bmp);
+                    break;
+                case "blue":
+                    Sendcolor.ColorBlue(width, height, Context, bmp);
+                    break;
+                case "lightblue":
+                    Sendcolor.ColorLightBlue(width, height, Context, bmp);
+                    break;
+                case "black":
+                case "nigger":
+                    Sendcolor.ColorBlack(width, height, Context, bmp);
+                    break;
+                case "white":
+                    Sendcolor.ColorWhite(width, height, Context, bmp);
+                    break;
+                case "lightgray":
+                    Sendcolor.ColorLightGray(width, height, Context, bmp);
+                    break;
+                case "gray":
+                    Sendcolor.ColorGray(width, height, Context, bmp);
+                    break;
+                case "yellow":
+                    Sendcolor.ColorYellow(width, height, Context, bmp);
+                    break;
+                case "orange":
+                    Sendcolor.ColorOrange(width, height, Context, bmp);
+                    break;
+                case "purple":
+                    Sendcolor.ColorPurple(width, height, Context, bmp);
+                    break;
+                case "random":
+                    Sendcolor.ColorRandom(width, height, Context, bmp);
+                    break;
+                case "randomall":
+                    Sendcolor.ColorRandomAll(width, height, Context, bmp);
+                    break;
+                case "randomvert":
+                    Sendcolor.ColorRandomVret(width, height, Context, bmp);
+                    break;
+                case "randomhor":
+                    Sendcolor.ColorRandomHor(width, height, Context, bmp);
+                    break;
+                default:
+                    break;
             }
 
             if (arg[0].Contains("#"))
@@ -317,7 +288,7 @@ namespace SuperBot_1_0.Modules.Usefull
         }
 
         [Command("convert")]
-        public async Task convert(params string[] code)
+        public async Task Convert(params string[] code)
         {
             if (code[0].Contains("#"))
             {
@@ -342,23 +313,23 @@ namespace SuperBot_1_0.Modules.Usefull
             }
         }
 
-        [Command("plot")]
-        public async Task plot()
-        {
-            Bitmap myBitmap = new Bitmap(@"./1024x1024.jpg");
-            Graphics g = Graphics.FromImage(myBitmap);
+        //[Command("plot")]
+        //public async Task Plot()
+        //{
+        //    Bitmap myBitmap = new Bitmap(@"./1024x1024.jpg");
+        //    Graphics g = Graphics.FromImage(myBitmap);
 
-            g.DrawLine(Pens.Gray, 1, 1, 200, 400);
-            myBitmap.Save(@"./text.png");
-            await Context.Channel.SendFileAsync(@"./text.png");
-            if (File.Exists(@"./text.png"))
-            {
-                File.Delete(@"./text.png");
-            }
-        }
+        //    g.DrawLine(Pens.Gray, 1, 1, 200, 400);
+        //    myBitmap.Save(@"./text.png");
+        //    await Context.Channel.SendFileAsync(@"./text.png");
+        //    if (File.Exists(@"./text.png"))
+        //    {
+        //        File.Delete(@"./text.png");
+        //    }
+        //}
 
         [Command("draw")]
-        public async Task draw(string arg)
+        public async Task Draw(string arg)
         {
             Bitmap myBitmap = new Bitmap(@"./1024x1024.jpg");
             Graphics g = Graphics.FromImage(myBitmap);
@@ -374,7 +345,7 @@ namespace SuperBot_1_0.Modules.Usefull
         }
 
         [Command("anime")]
-        public async Task searchAnime([Remainder]string anime)
+        public async Task SearchAnime([Remainder]string anime)
         {
             string url = $@"https://aniapi.nadekobot.me/anime/{anime}";
             string res;
@@ -390,9 +361,44 @@ namespace SuperBot_1_0.Modules.Usefull
                 {
                     res = await http.GetStringAsync(url).ConfigureAwait(false);
                     var json = JsonConvert.DeserializeObject<dynamic>(res);
-                    list.Add("English Title: " + json.title_english.ToString());
-                    list.Add("Japanese title: " + json.title_japanese.ToString());
-                    list.Add("Romaji title: " + json.title_romaji.ToString());
+                    string eng = json.title_english.ToString();
+                    string jap = json.title_japanese.ToString();
+                    string rom = json.title_romaji.ToString();
+                    if (eng == jap && eng == rom && jap == rom)
+                        list.Add("Japanese title: " + json.title_japanese.ToString());
+                    else if (eng == jap && eng != rom && jap == rom)
+                    {
+                        list.Add("English Title: " + json.title_english.ToString());
+                        list.Add("Romaji title: " + json.title_romaji.ToString());
+                    }
+                    else if (eng == jap && eng != rom && jap != rom)
+                    {
+                        list.Add("Japanese title: " + json.title_japanese.ToString());
+                        list.Add("Romaji title: " + json.title_romaji.ToString());
+                    }
+                    else if (eng == jap && eng == rom && jap != rom)
+                    {
+                        list.Add("English Title: " + json.title_english.ToString());
+                        list.Add("Japanese title: " + json.title_japanese.ToString());
+                    }
+                    else if (eng != jap && eng == rom && jap == rom)
+                    {
+                        list.Add("Japanese title: " + json.title_japanese.ToString());
+                        list.Add("Romaji title: " + json.title_romaji.ToString());
+                    }
+                    else if (eng != jap && eng == rom && jap != rom)
+                    {
+                        list.Add("Japanese title: " + json.title_japanese.ToString());
+                        list.Add("Romaji title: " + json.title_romaji.ToString());
+                    }
+                    else if (eng != jap && eng != rom && jap == rom)
+                    {
+                        list.Add("English Title: " + json.title_english.ToString());
+                        list.Add("Japanese title: " + json.title_japanese.ToString());
+                    }
+                    //list.Add("English Title: " + json.title_english.ToString());
+                    //list.Add("Japanese title: " + json.title_japanese.ToString());
+                    //list.Add("Romaji title: " + json.title_romaji.ToString());
                     list.Add("Synonyms: " + string.Join(", ", json.synonyms));
                     list.Add("Type: " + json.type.ToString());
                     list.Add("Average score: " + json.average_score.ToString());
@@ -406,13 +412,13 @@ namespace SuperBot_1_0.Modules.Usefull
                     {
                         x.Name = $"**{anime}**";
                         x.Value = string.Join("\n", list);
-                        x.IsInline = false;
+                        x.IsInline = true;
                     });
                     builder.AddField(x =>
                     {
                         x.Name = "**Description**";
                         x.Value = description;
-                        x.IsInline = false;
+                        x.IsInline = true;
                     });
                     //builder.WithImageUrl(json.image_url_lge.ToString());
                     builder.ImageUrl = json.image_url_lge.ToString();
@@ -420,11 +426,12 @@ namespace SuperBot_1_0.Modules.Usefull
             }
             catch (Exception ex)
             {
+                builder.Fields.Clear();
                 builder.Color = new Discord.Color(255, 0, 0);
                 builder.AddField(x =>
                 {
                     x.Name = "**Error**";
-                    x.Value = ex.Message.ToString();
+                    x.Value = ex.ToString();
                     x.IsInline = false;
                 });
                 await ReplyAsync("", false, builder.Build());
@@ -434,20 +441,20 @@ namespace SuperBot_1_0.Modules.Usefull
         }
 
         [Command("Encrypt"), RequireOwner]
-        public async Task encrypt([Remainder]string text)
+        public async Task Encrypt([Remainder]string text)
         {
-            File.AppendAllText("./encryptedmessage.txt", Encrypt.EncryptText(text));
+            File.AppendAllText("./encryptedmessage.txt", SuperBotDLL1_0.Untils.Encrypt.EncryptText(text));
             await Context.Channel.SendFileAsync("./encryptedmessage.txt");
             if (File.Exists("./encryptedmessage.txt"))
                 File.Delete("./encryptedmessage.txt");
         }
 
         [Command("Decrypt"), RequireOwner]
-        public async Task decrypt([Remainder]string text)
+        public async Task Decrypt([Remainder]string text)
         {
             try
             {
-                string output = Decrypt.ToText(text);
+                string output = SuperBotDLL1_0.Untils.Decrypt.ToText(text);
                 if (output.Contains("error"))
                     await ReplyAsync(output);
                 else

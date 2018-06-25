@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using System.Xml;
 using Discord;
 using Discord.Commands;
-using SuperBot_1_0.Services;
+using SuperBot_2._0.Services;
 
-namespace SuperBot_1_0.Modules.NSFW
+namespace SuperBot_2._0.Modules.NSFW
 {
     public class NSFW : ModuleBase
     {

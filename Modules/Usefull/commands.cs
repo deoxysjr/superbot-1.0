@@ -1,21 +1,25 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Discord.Commands;
-using SuperBot_1_0.Services;
+using SuperBot_2._0.Services;
 using System.Collections.Generic;
 using StrawPollNET.Enums;
-using SuperBotDLL1_0.RankingSystem;
-using Discord;
+using RestSharp;
+using System;
+using System.Diagnostics;
 
-namespace SuperBot_1_0.Modules
+namespace SuperBot_2._0.Modules.Usefull
 {
-    public class commands : ModuleBase
+    public class Commands : ModuleBase
     {
         [Command("test"), RequireOwner]
         public async Task Test()
         {
-            IUser user = Program._client.GetUser(Context.User.Id);
-            await ReplyAsync("Hi " + user.Mention);
+            Process.Start(@"D:\Super Bot\SuperBot_2.0\SuperBot_2.0\UserEditor\bin\Debug\UserEditor.exe");
+            //doc.Load("./file/serversetings.xml");
+            //XmlNodeList guild = doc.GetElementsByTagName("guild" + Context.Guild.Id.ToString());
+            //await ReplyAsync(guild[0].Attributes["on"].InnerText);
+            //IUser user = Program._client.GetUser(ulong.Parse(userid));
+            await ReplyAsync("done");
         }
 
         [Command("strawpoll")]
@@ -28,21 +32,35 @@ namespace SuperBot_1_0.Modules
                 var obj = new PollRequest()
                 {
                     Title = title,
-                    Options = new List<string>() { options[0], options[1], options[2] },
-                    Dupcheck = DupCheck.Disabled
-
+                    Options = new List<string>() { options[0], options[1] },
+                    Multi = false,
+                    Dupcheck = DupCheck.Normal,
+                    Captcha = false
                 };
 
                 var p = await poll.CreatePollAsync(obj);
-                var pp = await poll.GetPollAsync(1);
+                //var pp = await poll.GetPollAsync(p.Id);
 
-                await ReplyAsync(p.PollUrl);
+                await ReplyAsync(p.Id.ToString());
 
             }
             catch (Exception ex)
             {
                 await ReplyAsync("error: " + ex.Message.ToString());
             }
+        }
+
+        public IRestResponse response(string url)
+        {
+            var client = new RestClient()
+            {
+                BaseUrl = new Uri(url)
+            };
+            var request = new RestRequest()
+            {
+                Method = Method.GET
+            };
+            return client.Execute(request);
         }
 
         //string[] Scopes = { DriveService.Scope.DriveReadonly };
@@ -93,5 +111,13 @@ namespace SuperBot_1_0.Modules
         //{
         //    Console.WriteLine("No files found.");
         //}
+
+        //string key = "trnsl.1.1.20180304T105743Z.5a708ae4441191e9.692311a4087294698c179e05d0588c507654861d";
+        //string UrlDetectSrsLanguage = $@"https://translate.yandex.net/api/v1.5/tr.json/detect?key={key}&text={text}";
+        //string Urltranslate = $@"https://translate.yandex.net/api/v1.5/tr.json/translate?key={key}&text={text}&lang=en";
+        //var Response = response(Urltranslate);
+        //var json = JsonConvert.DeserializeObject<IDictionary>(Response.Content);
+        //IUser user = Program._client.GetUser(Context.User.Id);
+        //await ReplyAsync(json["text"].ToString().Replace("[", "").Replace("]", "").Replace("\"", ""));
     }
 }
